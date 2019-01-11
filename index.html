@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8"/>
+      <title> Рулетка </title>
+      <link href="style.css" rel="stylesheet" type="text/css"/>
+      <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+	  <script type="text/javascript" src="graph.js"></script>
+	  <script type="text/javascript" src="player.js"></script>
+	  <script type="text/javascript" src="game.js"></script>
+	  <script type="text/javascript" src="table.js"></script>
+	  <script type="text/javascript" src="engine.js"></script>
+	  <script type="text/javascript" src="bots.js"></script>
+  </head>
+
+  <body> 
+       <table id="table">
+	   </table>
+       <canvas class="endgame" id="canv" width="1100" height="100" style="position: absolute; top: 550px; left: 250px;"></canvas>
+       <p class="endgame">Сделайте вашу ставку до 1000:</p>
+	   <p><input type="number" min="0" max="1000" step="100" id="stavka1" class="cash endgame"></p>	 
+	   <input type="button" value="поставить" id="pl1" class="cash endgame">
+	   <div class="endgame" id=time></div>
+	   <div class="endgame" id=prize></div>
+       <div class="endgame descriprion" id=money>Деньги</div>
+	   <div class="endgame descriprion" id=bet> Ставка</div>
+	   <div class="endgame descriprion" id=chance>Шанс на победу</div>
+	   <div id="finish"></div>
+	   
+  <script type="text/javascript">
+  init(); // инициализируем контекст
+  
+  var waitbet = function() {
+	ctx.clearRect(0, 0, width, height);
+	starttime.timepassed = Date.now()- starttime.start;
+	document.getElementById('time').innerHTML = "время до окончания ставок: "+Math.ceil((15000-starttime.timepassed)/1000);
+	if (starttime.timepassed > 15000) {
+	setGame(preparation);                  
+	};
+	fillAll('#ADD8E6');
+	player.draw();
+  };
+  
+  var preparation = function(){
+    ctx.clearRect(0, 0, width, height);
+    display("none");
+	if (player.nodes.length>1){
+	fillAll('#ADD8E6');
+	roulet.generate();
+	setGame(game);
+	} else {
+	display("block");
+	setGame(start);
+	}
+   };
+  
+  var wait = function(){
+    starttime.timepassed = Date.now()- starttime.start;
+	document.getElementById('time').innerHTML = "время до начала приёма ставок: "+Math.ceil((35000-starttime.timepassed)/1000);
+    if (starttime.timepassed > 35000) {
+	setGame(start);                 
+	};
+	roulet.gameEnd();
+  };
+  
+  var game = function(){
+    ctx.clearRect(0, 0, width, height);
+	document.getElementById('time').innerHTML = "";
+	starttime.timepassed = Date.now()- starttime.start;
+	if (starttime.timepassed > 30000) {
+	setGame(result);                 
+	};
+	fillAll('#ADD8E6');
+	roulet.move();
+	drawline('black');
+	};  
+	
+  function result(){
+    ctx.clearRect(0, 0, width, height);
+	fillAll('#ADD8E6');
+	roulet.winner();
+	setGame(wait);                 
+	};
+  
+  function gameEnd(){
+  };
+	
+  function start() {
+	ctx.clearRect(0, 0, width, height);
+	starttime.start = Date.now();
+	player.cash(player.money);
+	player.clear();
+	display("block");
+	player.nodes.length=0;
+	roulet.nodes.length=0;
+	fillAll('#ADD8E6');
+	bots.bet();
+	setGame(waitbet);
+  };
+  
+  roulet.botsqtl();
+
+// startGame(start);
+ 
+  </script>
+  </body>
+
+</html> 

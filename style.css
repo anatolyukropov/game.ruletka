@@ -1,0 +1,78 @@
+p {
+  
+}
+body {
+	opacity: 1;  
+	overflow: auto;
+	background-color: #E1EAED; 	
+}
+
+#time {
+	position: absolute; /* Абсолютное позиционирование */
+    top: 480px; /* Положение от нижнего края */
+    left: 580px; /* Положение от правого края */
+	font-size: 30px;
+	font-weight: 900;
+}
+
+#prize {
+	position: absolute; /* Абсолютное позиционирование */
+    top: 700px; /* Положение от нижнего края */
+    left: 580px; /* Положение от правого края */
+	font-size: 30px;
+	font-weight: 900;
+}
+
+#money {
+	position: absolute; /* Абсолютное позиционирование */
+    top: 160px; /* Положение от нижнего края */
+    left: 400px; /* Положение от правого края */
+}
+
+#bet {
+	position: absolute; /* Абсолютное позиционирование */
+    top: 260px; /* Положение от нижнего края */
+    left: 400px; /* Положение от правого края */
+}
+
+#chance {
+	position: absolute; /* Абсолютное позиционирование */
+    top: 360px; /* Положение от нижнего края */
+    left: 400px; /* Положение от правого края */
+}
+
+#finish {
+	position: absolute; /* Абсолютное позиционирование */
+    top: 500px; /* Положение от нижнего края */
+    left: 400px; /* Положение от правого края */
+	font-size: 40px;
+	font-weight: 700;
+	display: none;
+}
+
+.descriprion {
+	font-size: 20px;
+	font-weight: 700;
+}
+
+td {
+	border: 2px solid #2F3841;
+	width:100px; 
+	height:100px;
+	cursor: default;
+}
+
+table {
+	position: absolute; /* Абсолютное позиционирование */
+    top: 10px; /* Положение от нижнего края */
+    left: 580px; /* Положение от правого края */
+    line-height: 1px;
+}
+
+.cash{
+	display: block;
+}
+
+.endgame {
+	display: block;
+}
